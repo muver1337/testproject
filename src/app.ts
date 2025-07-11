@@ -1,11 +1,11 @@
+import dotenv from 'dotenv';
+dotenv.config();
+
 import express from 'express';
 import swaggerUi from 'swagger-ui-express';
 import { swaggerSpec } from './config/swagger';
 import cors from 'cors';
-import dotenv from 'dotenv';
 import userRoutes from './routes/userRoutes';
-
-dotenv.config();
 
 const app = express();
 

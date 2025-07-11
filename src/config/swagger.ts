@@ -1,11 +1,5 @@
-import express from 'express';
-import swaggerUi from 'swagger-ui-express';
 import swaggerJSDoc from 'swagger-jsdoc';
-import userRouter from '../routes/userRoutes'; // Путь к твоему роутеру
 
-const app = express();
-
-// Конфигурация Swagger
 const swaggerOptions = {
     definition: {
         openapi: '3.0.0',
@@ -16,7 +10,7 @@ const swaggerOptions = {
         },
         servers: [
             {
-                url: 'http://localhost:3000', // Укажи свой адрес
+                url: 'http://localhost:3000',
             },
         ],
         components: {
@@ -24,22 +18,12 @@ const swaggerOptions = {
                 bearerAuth: {
                     type: 'http',
                     scheme: 'bearer',
-                    bearerFormat: 'JWT', // Указываем формат токена (например, JWT)
+                    bearerFormat: 'JWT',
                 },
             },
         },
     },
-    apis: ['./src/routes/userRoutes.ts', './src/swaggerAnnotations.ts'], // Включаем путь к файлам с аннотациями
+    apis: ['./src/routes/userRoutes.ts', './src/swaggerAnnotations.ts'],
 };
 
 export const swaggerSpec = swaggerJSDoc(swaggerOptions);
-
-// Swagger UI
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-
-app.use(express.json());
-app.use('/api', userRouter);
-
-app.listen(3000, () => {
-    console.log('🚀 Server is running at http://localhost:3000');
-});
