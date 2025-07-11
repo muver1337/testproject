@@ -1,5 +1,5 @@
 import {User} from '../models/User';
-import bcrypt from 'bcryptjs';
+import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
 const JWT_SECRET = process.env.JWT_SECRET;
@@ -61,7 +61,7 @@ export class UserService {
         return { token };
     }
 
-    static async getUserById(
+    static async getById(
         id: string,
         requesterId: string,
         requesterRole: UserRole
@@ -78,12 +78,12 @@ export class UserService {
         return user;
     }
 
-    static async getAllUsers() {
+    static async getAll() {
         return await User.getAll();
     }
 
 
-    static async blockUser(
+    static async block(
         id: string,
         requesterId: string,
         requesterRole: "USER" | "ADMIN"

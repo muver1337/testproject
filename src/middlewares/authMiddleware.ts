@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt, { JwtPayload } from 'jsonwebtoken';
-import { UserRole } from '../services/UserService'; // обязательно импортируй UserRole
+import { UserRole } from '../services/UserService';
 
 const JWT_SECRET = process.env.JWT_SECRET;
 if (!JWT_SECRET) {
@@ -15,7 +15,6 @@ export const authMiddleware = (req: Request, res: Response, next: NextFunction) 
     try {
         const decoded = jwt.verify(token, JWT_SECRET_TYPED) as JwtPayload;
 
-        // Явно приводим role к enum UserRole
         const role = decoded.role as UserRole;
 
         req.user = {

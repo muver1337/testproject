@@ -1,5 +1,4 @@
-// src/models/User.ts
-import {prisma} from '../utils/prisma'; // используй путь относительно своего проекта
+import {prisma} from '../utils/prisma';
 
 interface PrismaUser {
     id: string;
@@ -48,7 +47,7 @@ export class User {
 
     static async getAll(): Promise<User[]> {
         const usersData = await prisma.user.findMany();
-        return usersData.map((user) => new User(user as PrismaUser));
+        return usersData.map((user: PrismaUser) => new User(user));
     }
 
     static async create(data: Omit<PrismaUser, 'id' | 'status'>): Promise<User> {

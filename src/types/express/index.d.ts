@@ -1,5 +1,5 @@
 import { JwtPayload } from 'jsonwebtoken';
-import { UserRole } from '../../services/UserService'; // путь зависит от твоей структуры
+import { UserRole } from '../../services/UserService';
 
 declare global {
     namespace Express {

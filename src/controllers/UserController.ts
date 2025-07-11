@@ -24,13 +24,12 @@ export class UserController {
         }
     }
 
-    static async getUserById(req: Request, res: Response) {
+    static async getById(req: Request, res: Response) {
         try {
-            const {id} = req.params;
             if (!req.user) {
                 return res.status(401).json({ message: 'Unauthorized' });
             }
-            const user = await UserService.getUserById(
+            const user = await UserService.getById(
                 req.params.id,
                 req.user.id,
                 req.user.role
@@ -41,26 +40,25 @@ export class UserController {
         }
     }
 
-    static async getAllUsers(req: Request, res: Response) {
+    static async getAll(req: Request, res: Response) {
         try {
             if (!req.user || req.user.role !== 'ADMIN') {
                 return res.status(403).json({message: 'Access denied'});
             }
-            const users = await UserService.getAllUsers();
+            const users = await UserService.getAll();
             return res.status(200).json(users);
         } catch (error: any) {
             return res.status(500).json({message: error.message});
         }
     }
 
-    static async blockUser(req: Request, res: Response) {
+    static async block(req: Request, res: Response) {
         try {
             if (!req.user) {
                 return res.status(401).json({error: 'Unauthorized'});
             }
 
-            const role = req.user.role.toUpperCase() as 'USER' | 'ADMIN'; // Приведение к нужному типу
-            const user = await UserService.blockUser(req.params.id, req.user.id, req.user.role);
+            const user = await UserService.block(req.params.id, req.user.id, req.user.role);
 
             res.json(user);
         } catch (error) {

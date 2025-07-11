@@ -6,8 +6,8 @@ const router = Router();
 
 router.post('/register', UserController.register);
 router.post('/login', UserController.login);
-router.get('/user/:id', authMiddleware, UserController.getUserById);
-router.post('/user/:id/block', authMiddleware, UserController.blockUser);
-router.get('/user', authMiddleware, UserController.getAllUsers);
+router.get('/users/:id', authMiddleware, UserController.getById);
+router.patch('/users/:id/block', authMiddleware, UserController.block);
+router.get('/users', authMiddleware, UserController.getAll);
 
 export default router;
