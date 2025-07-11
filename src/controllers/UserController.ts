@@ -42,7 +42,7 @@ export class UserController {
 
     static async getAll(req: Request, res: Response) {
         try {
-            if (!req.user || req.user.role !== 'ADMIN') {
+            if (!req.user || req.user.role !== 'admin') {
                 return res.status(403).json({message: 'Access denied'});
             }
             const users = await UserService.getAll();

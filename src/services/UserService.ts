@@ -9,8 +9,8 @@ if (!JWT_SECRET) {
 const JWT_SECRET_TYPED = JWT_SECRET as string;
 
 export enum UserRole {
-    USER = 'USER',
-    ADMIN = 'ADMIN'
+    user = 'user',
+    admin = 'admin'
 }
 
 export class UserService {
@@ -66,7 +66,7 @@ export class UserService {
         requesterId: string,
         requesterRole: UserRole
     ) {
-        if (requesterRole !== UserRole.ADMIN && requesterId !== id) {
+        if (requesterRole !== UserRole.admin && requesterId !== id) {
             throw new Error('Access denied');
         }
 
@@ -86,9 +86,9 @@ export class UserService {
     static async block(
         id: string,
         requesterId: string,
-        requesterRole: "USER" | "ADMIN"
+        requesterRole: "user" | "admin"
     ) {
-        if (requesterRole !== UserRole.ADMIN && requesterId !== id) {
+        if (requesterRole !== UserRole.admin && requesterId !== id) {
             throw new Error('Access denied');
         }
 
@@ -97,7 +97,7 @@ export class UserService {
             throw new Error('User not found');
         }
 
-        await user.updateStatus('INACTIVE');
+        await user.updateStatus('inactive');
 
         return user;
     }

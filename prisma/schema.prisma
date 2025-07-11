@@ -8,13 +8,13 @@ datasource db {
 }
 
 enum Role {
-  USER
-  ADMIN
+  user
+  admin
 }
 
 enum Status {
-  ACTIVE
-  INACTIVE
+  active
+  inactive
 }
 
 model User {
@@ -25,8 +25,8 @@ model User {
   birthDate DateTime
   email     String   @unique
   password  String
-  role      Role     @default(USER)
-  status    Status   @default(ACTIVE)
+  role      Role     @default(user)
+  status    Status   @default(active)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
