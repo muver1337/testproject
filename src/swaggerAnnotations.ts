@@ -127,7 +127,7 @@ export const loginRoute = `
  *       404:
  *         description: Пользователь не найден
  */
-export const blockUserByIdRoute = `
+export const blockByIdRoute = `
 /api/users/{id}/block:
   patch:
     summary: Блокировка пользователя по ID
@@ -167,7 +167,7 @@ export const blockUserByIdRoute = `
  *       404:
  *         description: Пользователь не найден или нет доступа
  */
-export const getUserByIdRoute = `
+export const getByIdRoute = `
 /api/users/{id}:
   get:
     summary: Получить информацию о пользователе по ID
@@ -200,7 +200,7 @@ export const getUserByIdRoute = `
  *       401:
  *         description: Нет доступа (неавторизованный запрос)
  */
-export const getUsersRoute = `
+export const getRoute = `
 /api/users:
   get:
     summary: Получить список пользователей
