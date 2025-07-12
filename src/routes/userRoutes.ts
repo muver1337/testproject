@@ -1,7 +1,8 @@
-import { Router } from 'express';
-import { UserController } from '../controllers/UserController';
-import { AuthController } from '../controllers/AuthController';
-import { authMiddleware } from '../middlewares/authMiddleware';
+import {Router} from 'express';
+import {UserController} from '../controllers/UserController';
+import {AuthController} from '../controllers/AuthController';
+import {authMiddleware} from '../middlewares/authMiddleware';
+import {registerSchema, loginSchema} from '../validation/authValidation'
 
 const router = Router();
 
@@ -9,13 +10,27 @@ const router = Router();
  * @openapi
  * ${registerRoute}
  */
-router.post('/register', AuthController.register);
+router.post('/register', async (req, res) => {
+    try {
+        await registerSchema.validateAsync(req.body);
+        return AuthController.register(req, res);
+    } catch (error: any) {
+        return res.status(400).json({ error: error.details[0].message });
+    }
+});
 
 /**
  * @openapi
  * ${loginRoute}
  */
-router.post('/login', AuthController.login);
+router.post('/login', async (req, res) => {
+    try {
+        await loginSchema.validateAsync(req.body);
+        return AuthController.login(req, res);
+    } catch (error: any) {
+        return res.status(400).json({error: error.details[0].message});
+    }
+});
 
 /**
  * @openapi
